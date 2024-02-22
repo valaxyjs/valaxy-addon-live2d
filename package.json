@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "",
   "repository": {
-    "url": "https://github.com/Fog-Forest/live2d"
+    "url": "https://github.com/valaxyjs/valaxy-addon-live2d"
   },
   "keywords": [
     "valaxy"
@@ -13,5 +13,9 @@
     "./*": "./*"
   },
   "main": "index.ts",
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.19"
+  }
 }
