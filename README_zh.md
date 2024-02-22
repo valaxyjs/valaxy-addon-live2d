@@ -48,7 +48,7 @@ export interface Live2dOptions {
 | **apiPath** (可选) | 用于指定Live2D模型**API**的基础路径 | `https://live2d.fghrsh.net/api/` |
 | **cdnPath** (可选) | 用于指定Live2D模型资源的**CDN**基础路径 | `https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/` |
 | **live2dPath** (可选) | 用于指定Live2D模型和相关资源的配置项 | 
-| **live2dPath.baseUrl** (可选) | 设置`'online'`使用在线版的Live2D模型和相关资源、设置为`'custom'`时，使用自定义的Live2D文件路径，此路径可能会被覆盖。设置其他为自定义前缀。| `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/` | 
+| **live2dPath.baseUrl** (可选) | 设置`'online'`使用在线版的Live2D模型和相关资源、设置为`'local'`时会启用本地版的Live2D模型和相关资源，可自定义的Live2D URL路径前缀设置| `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/` | 
 | **live2dPath.live2dJS** (可选) | 用于指定存储Live2D核心文件的路径 | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js` |
 | **live2dPath.waifuCSS** (可选) | 用于指定存储Live2D样式表文件的路径 | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu.css` |
 | **live2dPath.waifuTipsJS** (可选) | 用于指定存储Live2D模型交互扩展的JS文件的路径 | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.js` |

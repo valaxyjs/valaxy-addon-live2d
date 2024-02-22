@@ -50,7 +50,7 @@ export interface Live2dOptions {
 | **apiPath** (optional) | Used to specify the base path for the Live2D model **API** | `https://live2d.fghrsh.net/api/` |
 | **cdnPath** (optional) | Used to specify the base path for the Live2D model resources **CDN** | `https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/` |
 | **live2dPath** (optional) | Used to specify the configuration items for the Live2D model and related resources |
-| **live2dPath.baseUrl** (optional) | Set to `'online'` to use the online version of the Live2D model and related resources, set to `'custom'` for using custom Live2D file paths, which might be overwritten. Setting others for custom prefix. | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/` |
+| **live2dPath.baseUrl** (optional) | Set to `'online'` to use the online version of Live2D models and related resources. Set to `'local'` to enable the local version of Live2D models and related resources. Allows for custom Live2D URL path prefix settings | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/` |
 | **live2dPath.live2dJS** (optional) | Used to specify the path for storing the Live2D core files | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js` |
 | **live2dPath.waifuCSS** (optional) | Used to specify the path for storing the Live2D stylesheet files | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu.css` |
 | **live2dPath.waifuTipsJS** (optional) | Used to specify the path for storing the JS files for Live2D model interaction extensions | `https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.js` |
