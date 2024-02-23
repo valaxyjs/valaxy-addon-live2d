@@ -6,6 +6,9 @@
   "repository": {
     "url": "https://github.com/valaxyjs/valaxy-addon-live2d"
   },
+  "scripts": {
+    "ci:publish": "npm publish --access public"
+  },
   "keywords": [
     "valaxy"
   ],
