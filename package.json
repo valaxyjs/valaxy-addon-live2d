@@ -15,10 +15,12 @@
   "main": "index.ts",
   "types": "index.d.ts",
   "devDependencies": {
+    "@antfu/eslint-config": "2.6.4",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.19",
+    "consola": "^3.2.3",
     "eslint": "^8.56.0",
-    "@antfu/eslint-config": "2.6.4",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "valaxy": "^0.18.1"
   }
 }
