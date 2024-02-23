@@ -1,7 +1,7 @@
 {
   "name": "valaxy-addon-live2d",
   "global": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "repository": {
     "url": "https://github.com/valaxyjs/valaxy-addon-live2d"

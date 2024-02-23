@@ -15,15 +15,13 @@ export const addonLive2d = defineValaxyAddon<Live2dOptions>(options => ({
 
   setup(valaxy) {
     valaxy.hook('build:before', async () => {
-      const assetsDir = path.resolve(__dirname, '../assets')
-      const publicDir = path.resolve(__dirname, '../public')
+      const srcDir = path.resolve(__dirname, '../assets')
       const destDir = path.resolve(process.cwd(), './public/live2d')
 
       try {
         await fs.ensureDir(destDir)
         consola.info('destDir', destDir)
-        await fs.copy(assetsDir, destDir)
-        await fs.copy(publicDir, destDir)
+        await fs.copy(srcDir, destDir)
         consola.info('Assets have been copied to the public folder.')
       }
       catch (err) {
