@@ -1,5 +1,6 @@
 # valaxy-addon-live2d
 
+<a href="https://www.npmjs.com/package/valaxy-addon-live2d" rel="nofollow"><img src="https://img.shields.io/npm/v/valaxy-addon-live2d?color=0078E7" alt="NPM version"></a>
 [中文文档](./README_zh.md)
 
 Theme developers can use this as a dependency to quickly integrate the live2d model widget into their projects.

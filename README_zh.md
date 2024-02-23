@@ -1,5 +1,8 @@
 # valaxy-addon-live2d
 
+<a href="https://www.npmjs.com/package/valaxy-addon-live2d" rel="nofollow"><img src="https://img.shields.io/npm/v/valaxy-addon-live2d?color=0078E7" alt="NPM version"></a>
+[English documents](./README.md)
+
 主题开发者可以通过将其作为依赖使用，以快速集成 live2d 看板娘组件。
 
 ## Usage
