@@ -4,13 +4,13 @@ import { useHead } from '@unhead/vue'
 import { computed } from 'vue'
 import type { Live2dOptions, Live2dPathOptions } from '../types'
 import { useAddonLive2d } from './options'
+import pkg from '../package.json'
 
 export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
   function initAutoLoad(live2dOptions: Live2dOptions) {
-    if (!isClient)
-      return
+    if (!isClient) return
 
-    const live2dOnlinePathBaseUrl = '' // TODO: Upload a jsdelivr CDN package
+    const live2dOnlinePathBaseUrl = `https://cdn.jsdelivr.net/gh/valaxyjs/valaxy-addon-live2d@v${pkg.version}/assets/`
     const live2dLocalPathBaseUrl = 'live2d/'
 
     const defaultOptions: Live2dOptions = {
@@ -53,8 +53,7 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
       })
     })
   }
-  if (options.value)
-    initAutoLoad(options.value)
+  if (options.value) initAutoLoad(options.value)
 }
 
 export function useAutoLoadWithOptions() {
