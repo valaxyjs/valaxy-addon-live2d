@@ -1,7 +1,7 @@
 {
   "name": "valaxy-addon-live2d",
   "global": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "repository": {
     "url": "https://github.com/valaxyjs/valaxy-addon-live2d"
@@ -16,6 +16,9 @@
   "types": "index.d.ts",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.19"
+    "@types/node": "^20.11.19",
+    "eslint": "^8.56.0",
+    "@antfu/eslint-config": "2.6.4",
+    "typescript": "^5.3.3"
   }
 }
