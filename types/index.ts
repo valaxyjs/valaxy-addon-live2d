@@ -4,7 +4,7 @@ export interface Live2dOptions {
   apiPath?: string
   cdnPath?: string
   live2dPath?: Live2dPathOptions
-  tools?: []
+  tools?: Array<"hitokoto" | "asteroids" | "switch-model" | "switch-texture" | "photo" | "info" | "quit">;
 }
 
 export interface Live2dPathOptions {
