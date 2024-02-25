@@ -16,5 +16,8 @@
   "types": "index.d.ts",
   "scripts": {
     "ci:publish": "npm publish --access public"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4"
   }
 }
