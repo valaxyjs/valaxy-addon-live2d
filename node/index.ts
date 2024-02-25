@@ -28,13 +28,15 @@ export const addonLive2d = defineValaxyAddon<Live2dOptions>(options => ({
         consola.error('Error copying assets to the public folder:', err)
       }
 
-      try {
-        const gitignorePath = path.join(destDir, '.gitignore');
-        await fs.writeFile(gitignorePath, '*');
-        consola.info('.gitignore file has been created in the public/live2d folder.');
-      } catch (err) {
-        consola.error('Error creating .gitignore file:', err);
-      }
+      // TODO: This will result in the loss of deployment files
+      // try {
+      //   const gitignorePath = path.join(destDir, '.gitignore')
+      //   await fs.writeFile(gitignorePath, '*')
+      //   consola.info('.gitignore file has been created in the public/live2d folder.')
+      // }
+      // catch (err) {
+      //   consola.error('Error creating .gitignore file:', err)
+      // }
     })
   },
 }))
