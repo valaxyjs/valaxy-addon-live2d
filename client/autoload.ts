@@ -22,8 +22,13 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
     const newLive2dOptions = Object.assign(defaultOptions, live2dOptions)
 
     let live2dPathBaseUrl
-    live2dPathBaseUrl = newLive2dOptions.live2dPath?.baseUrl === 'online' && live2dOnlinePathBaseUrl
-    live2dPathBaseUrl = newLive2dOptions.live2dPath?.baseUrl === 'local' ? live2dLocalPathBaseUrl : newLive2dOptions.live2dPath?.baseUrl
+    if (newLive2dOptions.live2dPath?.baseUrl === 'online') {
+      live2dPathBaseUrl = live2dOnlinePathBaseUrl
+    } else if (newLive2dOptions.live2dPath?.baseUrl === 'local') {
+      live2dPathBaseUrl = live2dLocalPathBaseUrl
+    } else {
+      live2dPathBaseUrl = newLive2dOptions.live2dPath?.baseUrl
+    }
 
     const live2dPath: Live2dPathOptions = {
       waifuCSS: newLive2dOptions.live2dPath?.waifuCSS ? newLive2dOptions.live2dPath.waifuCSS : `${live2dPathBaseUrl}waifu.css`,
