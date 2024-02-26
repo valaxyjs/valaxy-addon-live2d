@@ -3,12 +3,13 @@ import type { ComputedRef } from 'vue'
 import { useHead } from '@unhead/vue'
 import { computed } from 'vue'
 import type { Live2dOptions, Live2dPathOptions } from '../types'
-import { useAddonLive2d } from './options'
 import pkg from '../package.json'
+import { useAddonLive2d } from './options'
 
 export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
   function initAutoLoad(live2dOptions: Live2dOptions) {
-    if (!isClient) return
+    if (!isClient)
+      return
 
     const live2dOnlinePathBaseUrl = `https://cdn.jsdelivr.net/gh/valaxyjs/valaxy-addon-live2d@v${pkg.version}/assets/`
     const live2dLocalPathBaseUrl = 'live2d/'
@@ -22,13 +23,12 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
     const newLive2dOptions = Object.assign(defaultOptions, live2dOptions)
 
     let live2dPathBaseUrl
-    if (newLive2dOptions.live2dPath?.baseUrl === 'online') {
+    if (newLive2dOptions.live2dPath?.baseUrl === 'online')
       live2dPathBaseUrl = live2dOnlinePathBaseUrl
-    } else if (newLive2dOptions.live2dPath?.baseUrl === 'local') {
+    else if (newLive2dOptions.live2dPath?.baseUrl === 'local')
       live2dPathBaseUrl = live2dLocalPathBaseUrl
-    } else {
+    else
       live2dPathBaseUrl = newLive2dOptions.live2dPath?.baseUrl
-    }
 
     const live2dPath: Live2dPathOptions = {
       waifuCSS: newLive2dOptions.live2dPath?.waifuCSS ? newLive2dOptions.live2dPath.waifuCSS : `${live2dPathBaseUrl}waifu.css`,
@@ -58,7 +58,8 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
       })
     })
   }
-  if (options.value) initAutoLoad(options.value)
+  if (options.value)
+    initAutoLoad(options.value)
 }
 
 export function useAutoLoadWithOptions() {
