@@ -2,6 +2,7 @@ import { isClient, useScriptTag } from '@vueuse/core'
 import type { ComputedRef } from 'vue'
 import { useHead } from '@unhead/vue'
 import { computed } from 'vue'
+import { useSiteConfig } from 'valaxy'
 import type { Live2dOptions, Live2dPathOptions } from '../types'
 import pkg from '../package.json'
 import { useAddonLive2d } from './options'
@@ -11,7 +12,9 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
     if (!isClient)
       return
 
-    const live2dOnlinePathBaseUrl = `https://cdn.jsdelivr.net/gh/valaxyjs/valaxy-addon-live2d@v${pkg.version}/assets/`
+    const siteConfig = useSiteConfig()
+    const cdnPrefix = computed(() => siteConfig.value.cdn.prefix)
+    const live2dOnlinePathBaseUrl = `${cdnPrefix.value}valaxy-addon-live2d@v${pkg.version}/assets/`
     const live2dLocalPathBaseUrl = 'live2d/'
 
     const defaultOptions: Live2dOptions = {
