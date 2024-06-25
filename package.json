@@ -7,7 +7,10 @@
     "url": "https://github.com/valaxyjs/valaxy-addon-live2d"
   },
   "keywords": [
-    "valaxy"
+    "valaxy",
+    "addon",
+    "valaxy-addon",
+    "live2d"
   ],
   "exports": {
     "./*": "./*"
