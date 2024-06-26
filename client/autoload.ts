@@ -57,6 +57,7 @@ export function useAutoLoad(options: ComputedRef<Live2dOptions | undefined>) {
 
     useScriptTag(live2dPath.live2dJS as string, () => {
       useScriptTag(live2dPath.waifuTipsJS as string, () => {
+        // @ts-expect-error missing types
         initWidget(initWidgetJson)
       })
     })
