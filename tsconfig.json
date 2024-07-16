@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true
+  },
+  "include": ["app", "helpers", "types/**/*.ts"],
+  "exclude": ["node_modules", "lib"]
+}

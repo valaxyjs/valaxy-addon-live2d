@@ -21,6 +21,9 @@
     "ci:publish": "npm publish --access public"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4"
+    "@types/stats.js": "^0.17.3",
+    "pixi-live2d-display": "^0.4.0",
+    "pixi.js": "6.5.10",
+    "stats.js": "^0.17.0"
   }
 }
