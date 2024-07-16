@@ -89,7 +89,6 @@ export default defineValaxyConfig({
 
 ## TODO
 
-- [ ] 添加隐藏移动端 Live2D 的配置
 - [ ] 优化 Live2D 拍照工具，防止人物闪烁
 - [ ] 兼容 `valaxy-addon-hitokoto` 一言插件
 - [ ] 为单个人物提供独立的 tips 配置
