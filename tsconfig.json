@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "composite": true,
+    "target": "ESNext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "resolveJsonModule": true
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["app", "helpers", "types/**/*.ts"],
   "exclude": ["node_modules", "lib"]

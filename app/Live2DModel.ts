@@ -1,11 +1,11 @@
 import { Live2DModel as BaseLive2DModel } from 'pixi-live2d-display'
-import { HitAreaFrames } from 'pixi-live2d-display/extra'
+import { Graphics } from '@pixi/graphics'
 import { Ticker } from '@pixi/ticker'
 
 BaseLive2DModel.registerTicker(Ticker)
 
 export class Live2DModel extends BaseLive2DModel {
-  hitAreaFrames: HitAreaFrames
+  hitAreaFrames: Graphics
 
   currentMotionStartTime = performance.now()
   currentMotionDuration = 0
@@ -13,7 +13,7 @@ export class Live2DModel extends BaseLive2DModel {
   constructor() {
     super()
 
-    this.hitAreaFrames = new HitAreaFrames()
+    this.hitAreaFrames = new Graphics()
     this.hitAreaFrames.visible = false
 
     this.once('modelLoaded', this._init)

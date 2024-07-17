@@ -1,8 +1,7 @@
 import type { InternalModel, Live2DModel, ModelSettings } from 'pixi-live2d-display'
 import { SoundManager } from 'pixi-live2d-display'
 import { Graphics } from '@pixi/graphics'
-import Stats from 'stats.js'
-import { skipHello } from '@pixi/utils'
+import { utils } from 'pixi.js'
 import { settings } from '@pixi/settings'
 import type { Extract } from '@pixi/extract'
 import type { Live2dOptions, Live2dTips } from '../types'
@@ -10,11 +9,6 @@ import { save } from '../helpers/storage'
 import type { Live2dTipsHandler } from '../helpers/tips'
 import { ModelEntity } from './ModelEntity'
 import { PixiApp } from './PixiApp'
-
-const stats = new Stats()
-stats.showPanel(0)
-stats.dom.style.left = ''
-stats.dom.style.right = '0'
 
 export class Live2DApp {
   static model: ModelEntity
@@ -27,6 +21,7 @@ export class Live2DApp {
   static debugger: boolean
   static live2dTipsHandler: Live2dTipsHandler
   static live2dTips: Live2dTips
+  static stats: Stats
 
   private static _volume = SoundManager.volume
   private static _showHitAreaFrames = false
@@ -35,12 +30,20 @@ export class Live2DApp {
 
   static async init(options: Live2dOptions, live2dTipsHandler: Live2dTipsHandler) {
     if (options.skipHello)
-      skipHello()
+      utils.skipHello()
     Live2DApp.showStats = Live2DApp.debugger = options.debugger
     Live2DApp.widthLimit = options.widthLimit
     Live2DApp.safetyMargin = options.safetyMargin
     Live2DApp.live2dTips = options.live2dTips
     Live2DApp.live2dTipsHandler = live2dTipsHandler
+
+    if (options.debugger) {
+      const Stats = (await import('stats.js')).default
+      this.stats = new Stats()
+      this.stats.showPanel(0)
+      this.stats.dom.style.left = ''
+      this.stats.dom.style.right = '0'
+    }
   }
 
   static async loadModel(source: string | ModelSettings) {
@@ -66,7 +69,7 @@ export class Live2DApp {
     model.on('modelLoaded', (_live2dModel: Live2DModel) => {
       // if (!this.pixiApp.stage.children.includes(live2dModel)) {
       if (!this.pixiApp) {
-        this.pixiApp = new PixiApp(stats)
+        this.pixiApp = new PixiApp(this.stats)
       }
     })
   }
@@ -186,11 +189,14 @@ export class Live2DApp {
   static set showStats(value: boolean) {
     this._showStats = value
 
+    if (!this.stats)
+      return
+
     if (value) {
-      document.body.appendChild(stats.dom)
+      document.body.appendChild(this.stats.dom)
     }
     else {
-      stats.dom.parentElement?.removeChild(stats.dom)
+      this.stats.dom.parentElement?.removeChild(this.stats.dom)
     }
   }
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import 'pixi.js'
-import '@pixi/utils'
 import './styles/index.scss'
 import { watch } from 'vue'
 import { useAddonLive2d } from './client'

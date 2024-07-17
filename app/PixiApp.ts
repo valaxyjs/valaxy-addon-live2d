@@ -33,11 +33,11 @@ export class PixiApp extends Application {
     this.ticker.remove(this.render, this)
 
     this.ticker.add(() => {
-      stats.begin()
+      stats?.begin()
 
       this.render()
 
-      stats.end()
+      stats?.end()
     })
   }
 }
