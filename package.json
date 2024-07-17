@@ -30,8 +30,5 @@
   "devDependencies": {
     "@types/stats.js": "^0.17.3",
     "tsx": "^4.16.2"
-  },
-  "publishConfig": {
-    "directory": "dist"
   }
 }
