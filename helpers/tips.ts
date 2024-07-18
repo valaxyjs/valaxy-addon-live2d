@@ -55,13 +55,13 @@ export class Live2dTipsHandler {
     })
   }
 
-  private randomSelection(obj) {
+  private randomSelection(obj: object) {
     return Array.isArray(obj) ? obj[Math.floor(Math.random() * obj.length)] : obj
   }
 
   private welcomeMessage() {
     const now = new Date().getHours()
-    let text
+    let messageText: string | string[]
     const timeConfig = this.live2dTips.time
 
     for (let i = 0; i < timeConfig.length; i++) {
@@ -70,18 +70,19 @@ export class Live2dTipsHandler {
       const endHour = Number.parseInt(timeRange[1])
 
       if (now >= startHour && now <= endHour) {
-        if (Array.isArray(timeConfig[i].text)) {
-          text = this.randomSelection(timeConfig[i].text)
+        const text = timeConfig[i].text
+        if (Array.isArray(text)) {
+          messageText = this.randomSelection(text)
         }
         else {
-          text = timeConfig[i].text
+          messageText = text
         }
         break
       }
     }
 
     setTimeout(() => {
-      this.showMessage(text, 7000, 8)
+      this.showMessage(messageText, 7000, 8)
     }, 3000)
   }
 
@@ -95,10 +96,10 @@ export class Live2dTipsHandler {
       else {
         const searchParams = referrer.search.split('&')
         if (domain === 'baidu') {
-          return `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${searchParams.find(param => param.startsWith('wd=')).split('=')[1]}</span> 找到的我吗？`
+          return `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${searchParams.find(param => param.startsWith('wd='))?.split('=')[1]}</span> 找到的我吗？`
         }
         else if (domain === 'so') {
-          return `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${searchParams.find(param => param.startsWith('q=')).split('=')[1]}</span> 找到的我吗？`
+          return `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${searchParams.find(param => param.startsWith('q='))?.split('=')[1]}</span> 找到的我吗？`
         }
         else if (domain === 'google') {
           return `Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${document.title.split(' - ')[0]}」</span>`
@@ -115,7 +116,7 @@ export class Live2dTipsHandler {
 
   private activityBasedMessages() {
     let userAction = false
-    let userActionTimer
+    let userActionTimer: number | null | ReturnType<typeof setInterval> = null
     const messageArray = this.live2dTips.message.default
 
     window.addEventListener('mousemove', () => userAction = true)
@@ -124,8 +125,10 @@ export class Live2dTipsHandler {
     setInterval(() => {
       if (userAction) {
         userAction = false
-        clearInterval(userActionTimer)
-        userActionTimer = null
+        if (userActionTimer !== null) {
+          clearInterval(userActionTimer)
+          userActionTimer = null
+        }
       }
       else if (!userActionTimer) {
         userActionTimer = setInterval(() => {
@@ -159,22 +162,25 @@ export class Live2dTipsHandler {
       })
   }
 
-  showMessage(text, timeout, priority) {
-    const tips = document.getElementById('live2d-tips')
+  showMessage(text: string| object, timeout: number = 3000, priority: string | number | boolean) {
+    const tips = document.getElementById('live2d-tips')!
 
     if (!text) {
       tips.classList.remove('live2d-tips-active')
       return
     }
 
-    if (!sessionStorage.getItem('live2d-text') || sessionStorage.getItem('live2d-text') <= priority) {
+    const currentPriority = sessionStorage.getItem('live2d-text')
+    const convertedPriority = typeof priority === 'number' ? priority.toString() : priority.toString()
+
+    if (!currentPriority || currentPriority <= convertedPriority) {
       if (this.messageTimer) {
         clearTimeout(this.messageTimer)
         this.messageTimer = null
       }
-      text = this.randomSelection(text)
-      sessionStorage.setItem('live2d-text', priority)
-      tips.innerHTML = text
+
+      sessionStorage.setItem('live2d-text', convertedPriority)
+      tips.innerHTML = typeof text === 'string' ? text : this.randomSelection(text)
       tips.classList.add('live2d-tips-active')
       this.messageTimer = window.setTimeout(() => {
         sessionStorage.removeItem('live2d-text')

@@ -12,7 +12,7 @@ export class PixiApp extends Application {
   declare renderer: Renderer
 
   constructor(stats: Stats) {
-    const view = document.getElementById('live2d-canvas') as HTMLCanvasElement | null
+    const view = document.getElementById('live2d-canvas') as HTMLCanvasElement
 
     if (!view)
       console.warn('The view element with id "live2d" was not found in the document.')

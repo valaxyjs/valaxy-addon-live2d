@@ -31,10 +31,10 @@ export class Live2DApp {
   static async init(options: Live2dOptions, live2dTipsHandler: Live2dTipsHandler) {
     if (options.skipHello)
       utils.skipHello()
-    Live2DApp.showStats = Live2DApp.debugger = options.debugger
-    Live2DApp.widthLimit = options.widthLimit
-    Live2DApp.safetyMargin = options.safetyMargin
-    Live2DApp.live2dTips = options.live2dTips
+    Live2DApp.showStats = Live2DApp.debugger = options.debugger!
+    Live2DApp.widthLimit = options.widthLimit!
+    Live2DApp.safetyMargin = options.safetyMargin!
+    Live2DApp.live2dTips = options.live2dTips!
     Live2DApp.live2dTipsHandler = live2dTipsHandler
 
     if (options.debugger) {
@@ -54,7 +54,7 @@ export class Live2DApp {
       // 保证live2d加载完成
       await model.loadPromise
 
-      this.mount(model.live2dModel)
+      this.mount(model.live2dModel!)
 
       this.model = model
 
@@ -142,7 +142,7 @@ export class Live2DApp {
 
   static clearAppStage(live2dModel?: Live2DModel<InternalModel>): void {
     if (live2dModel) {
-      this.pixiApp.stage.removeChild(this.model.live2dModel)
+      this.pixiApp.stage.removeChild(this.model.live2dModel!)
       return
     }
 
@@ -154,8 +154,8 @@ export class Live2DApp {
   }
 
   static captureFrame() {
-    this.model.live2dModel.anchor.set(0)
-    this.model.live2dModel.scale.set(1)
+    this.model.live2dModel!.anchor.set(0)
+    this.model.live2dModel!.scale.set(1)
 
     const pixiModel = this.model.live2dModel
     settings.RESOLUTION = 1
@@ -164,7 +164,7 @@ export class Live2DApp {
     setTimeout(() => {
       try {
         const renderer = this.pixiApp.renderer
-        const image = (renderer.plugins.extract as Extract).image(pixiModel, 'image/png', 0.9)
+        const image = (renderer.plugins.extract as Extract).image(pixiModel!, 'image/png', 0.9)
 
         const link = document.createElement('a')
         link.href = image.src
@@ -174,8 +174,8 @@ export class Live2DApp {
         link.click()
         document.body.removeChild(link)
 
-        this.model.live2dModel.scale.set(this.scaleRatio)
-        this.model.live2dModel.anchor.set(-(this.horizontalAnchorAdjustment / 2), -this.verticalAnchorAdjustment)
+        this.model.live2dModel!.scale.set(this.scaleRatio)
+        this.model.live2dModel!.anchor.set(-(this.horizontalAnchorAdjustment / 2), -this.verticalAnchorAdjustment)
 
         this.live2dTipsHandler.showMessage(this.live2dTips.tool.camera, 6000, 9)
       }

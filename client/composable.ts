@@ -55,7 +55,7 @@ export function useAddonLive2d() {
     const randomKey = keys[Math.floor(Math.random() * keys.length)]
     setLive2DModelKeys(randomKey, 0)
 
-    live2dTipsHandler.showMessage(live2DCollection![randomKey].message, 4000, 10)
+    live2dTipsHandler.showMessage(live2DCollection![randomKey].message!, 4000, 10)
 
     return live2DCollection![randomKey].models[0]
   }
@@ -71,7 +71,7 @@ export function useAddonLive2d() {
 
     setLive2DModelKeys(newModelKey, 0)
 
-    live2dTipsHandler.showMessage(live2DCollection![newModelKey].message, 4000, 10)
+    live2dTipsHandler.showMessage(live2DCollection![newModelKey].message!, 4000, 10)
 
     return typeof newLive2DModels === 'string' ? await getModelJson(newLive2DModels, 0) : newLive2DModels[0]
   }

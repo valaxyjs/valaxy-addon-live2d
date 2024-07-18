@@ -1,6 +1,7 @@
 {
   "extends": "valaxy-theme-sakura",
   "compilerOptions": {
+    "composite": true,
     "target": "ESNext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -9,7 +10,6 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strictNullChecks": false
   },
   "include": ["app", "helpers", "types/**/*.ts"],
   "exclude": ["node_modules", "lib"]

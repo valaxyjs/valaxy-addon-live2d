@@ -7,7 +7,7 @@ import { Live2DModel } from './Live2DModel'
 export class ModelEntity extends EventEmitter {
   live2dModel?: Live2DModel
 
-  source: string | object
+  source: string | object | undefined
   loadingState = new ModelLoadingState()
   name = 'New Model'
   aspectRatio = 1
