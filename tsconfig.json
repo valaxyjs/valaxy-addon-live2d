@@ -1,5 +1,4 @@
 {
-  "extends": "valaxy-theme-sakura",
   "compilerOptions": {
     "composite": true,
     "target": "ESNext",
