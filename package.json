@@ -2,6 +2,7 @@
   "name": "valaxy-addon-live2d",
   "global": true,
   "version": "0.2.1",
+  "packageManager": "pnpm@9.5.0",
   "description": "",
   "repository": {
     "url": "git+https://github.com/valaxyjs/valaxy-addon-live2d.git"
@@ -30,6 +31,8 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
     "@types/stats.js": "^0.17.3",
-    "tsx": "^4.16.2"
+    "consola": "^3.2.3",
+    "tsx": "^4.16.2",
+    "vue-tsc": "^2.0.28"
   }
 }
