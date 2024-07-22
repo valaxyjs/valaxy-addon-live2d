@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { isClient, useMediaQuery } from '@vueuse/core'
 import type { Live2DApp as Live2DAppType } from '../app/Live2DApp'
 import { Live2dTipsHandler } from '../helpers/tips'
@@ -15,7 +15,7 @@ export function useAddonLive2d() {
 
   const live2DApp = ref<typeof Live2DAppType>()
   const isLive2DHide = ref(false)
-  let isHidden: boolean | Ref<boolean> = false
+  let isHidden: Ref<boolean> = ref(false)
   const live2dTipsHandler = new Live2dTipsHandler(live2dTips!)
 
   async function _initializeLive2DApp() {
@@ -165,6 +165,14 @@ export function useAddonLive2d() {
     const screenSize = typeof hideOnScreenSizes === 'string' ? hideOnScreenSizes : `${hideOnScreenSizes}px`
     isHidden = useMediaQuery(`(max-width: ${screenSize})`)
   }
+
+  watch(isHidden, (matches) => {
+    if (matches) {
+      hideLive2D()
+    } else {
+      showLive2D()
+    }
+  })
 
   return {
     live2DApp,

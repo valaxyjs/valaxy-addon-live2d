@@ -5,18 +5,18 @@ import { watch } from 'vue'
 import { useAddonLive2d } from './client'
 import { hideLive2dTool, showLive2dTool } from './utils/animate'
 
-const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLive2DHide, isHidden } = useAddonLive2d()
+const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLive2DHide } = useAddonLive2d()
 
 watch(isLive2DHide, isHide => (isHide ? hideLive2dTool : showLive2dTool)())
 </script>
 
 <template>
-  <div v-show="!isHidden" id="live2d">
+  <div id="live2d">
     <div id="live2d-tips" />
     <canvas id="live2d-canvas" />
   </div>
 
-  <div v-show="!isHidden" id="live2d-tools" :class="isLive2DHide ? 'hide' : 'show'">
+  <div id="live2d-tools" :class="isLive2DHide ? 'hide' : 'show'">
     <span id="live2d-tool-quit" class="live2d-tool hide-live2d" @click="toggleLive2DVisibility()">
       {{ !isLive2DHide ? 'Hide' : 'Show' }}
     </span>
