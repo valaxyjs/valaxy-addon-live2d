@@ -96,6 +96,7 @@
     writing-mode: vertical-rl;
     transition-property: all;
     transition-duration: 0.5s, 0.5s;
+    will-change: transform;
 
     &:hover {
       transform: translateX(0);

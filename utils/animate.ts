@@ -36,15 +36,21 @@ export function hideLive2dTool(duration = 200) {
     const progress = timestamp - start
     const percentage = Math.min(progress / duration, 1)
 
+    /**
+     * TODO: Waiting for full method support, this is an optimization direction
+     * @ses https://chromestatus.com/feature/5196713071738880
+     */
     live2dTools.forEach((live2dTool) => {
       if (percentage < 1) {
         live2dTool.style.padding = `5px 0`
         live2dTool.style.maxHeight = `60px`
+        // live2dTool.style.height = `calc-size(auto)`
         live2dTool.style.transform = `translateX(${-40 * percentage}px)`
       }
       else {
-        live2dTool.style.padding = `0px 0`
-        live2dTool.style.maxHeight = `0px`
+        live2dTool.style.padding = `0`
+        live2dTool.style.maxHeight = `0`
+        // live2dTool.style.height = `calc-size(0px)`
       }
     })
 
