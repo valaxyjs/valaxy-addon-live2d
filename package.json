@@ -1,7 +1,7 @@
 {
   "name": "valaxy-addon-live2d",
   "global": true,
-  "version": "0.2.2",
+  "version": "0.3.0",
   "packageManager": "pnpm@9.5.0",
   "description": "",
   "repository": {
