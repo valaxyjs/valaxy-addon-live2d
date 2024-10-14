@@ -70,7 +70,6 @@ export class Live2DModel extends BaseLive2DModel {
   }
 
   startHitMotion(hitAreaNames: string[]) {
-    debugger
     for (let area of hitAreaNames) {
       area = area.toLowerCase()
 
