@@ -1,12 +1,11 @@
 import type { InternalModel, Live2DModel, ModelSettings } from 'pixi-live2d-display'
-import { SoundManager } from 'pixi-live2d-display'
-import { Graphics } from '@pixi/graphics'
-import { utils } from 'pixi.js'
-import { settings } from '@pixi/settings'
-import type { Extract } from '@pixi/extract'
-import type { Live2dOptions, Live2dTips } from '../types'
-import { save } from '../helpers/storage'
 import type { Live2dTipsHandler } from '../helpers/tips'
+import type { Live2dOptions, Live2dTips } from '../types'
+import { Graphics } from '@pixi/graphics'
+import { settings } from '@pixi/settings'
+import { utils } from 'pixi.js'
+import { SoundManager } from 'pixi-live2d-display'
+import { save } from '../helpers/storage'
 import { ModelEntity } from './ModelEntity'
 import { PixiApp } from './PixiApp'
 
@@ -29,8 +28,7 @@ export class Live2DApp {
   private static _showStats = false
 
   static async init(options: Live2dOptions, live2dTipsHandler: Live2dTipsHandler) {
-    if (options.skipHello)
-      utils.skipHello()
+    settings.RENDER_OPTIONS.hello = !options.skipHello
     Live2DApp.showStats = Live2DApp.debugger = options.debugger!
     Live2DApp.widthLimit = options.widthLimit!
     Live2DApp.safetyMargin = options.safetyMargin!
@@ -164,7 +162,7 @@ export class Live2DApp {
     setTimeout(() => {
       try {
         const renderer = this.pixiApp.renderer
-        const image = (renderer.plugins.extract as Extract).image(pixiModel!, 'image/png', 0.9)
+        const image = renderer.plugins.extract.image(pixiModel!, 'image/png', 0.9)
 
         const link = document.createElement('a')
         link.href = image.src

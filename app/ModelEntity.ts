@@ -1,8 +1,8 @@
-import { EventEmitter } from '@pixi/utils'
 import type { ModelSettings } from 'pixi-live2d-display'
+import { EventEmitter } from '@pixi/utils'
 import { Live2DFactory } from 'pixi-live2d-display'
-import { ModelLoadingState } from './ModelLoadingState'
 import { Live2DModel } from './Live2DModel'
+import { ModelLoadingState } from './ModelLoadingState'
 
 export class ModelEntity extends EventEmitter {
   live2dModel?: Live2DModel

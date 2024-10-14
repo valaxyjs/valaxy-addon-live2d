@@ -1,12 +1,12 @@
 import type { Ref } from 'vue'
-import { ref, watch } from 'vue'
-import { isClient, useMediaQuery } from '@vueuse/core'
 import type { Live2DApp as Live2DAppType } from '../app/Live2DApp'
+import { isClient, useMediaQuery } from '@vueuse/core'
+import { ref, watch } from 'vue'
 import { Live2dTipsHandler } from '../helpers/tips'
-import { getLive2DModel, setLive2DModelKeys } from '../utils/storage'
-import { convertJsdelivrUrlToGithubApiUrl, getFilenamesFromGitHub } from '../utils/network'
-import { getModelJson } from '../utils/model'
 import { getCookie, setCookie } from '../utils/cookie'
+import { getModelJson } from '../utils/model'
+import { convertJsdelivrUrlToGithubApiUrl, getFilenamesFromGitHub } from '../utils/network'
+import { getLive2DModel, setLive2DModelKeys } from '../utils/storage'
 import { useAddonLive2dConfig } from './options'
 
 export function useAddonLive2d() {
@@ -129,7 +129,7 @@ export function useAddonLive2d() {
     const live2dElement = document.getElementById('live2d')!
 
     isLive2DHide.value = live2dElement.style.bottom === '0px' || live2dElement.style.bottom === ''
-    // eslint-disable-next-line ts/no-unused-expressions
+
     isLive2DHide.value ? hideLive2D() : showLive2D()
   }
 
@@ -169,7 +169,8 @@ export function useAddonLive2d() {
   watch(isHidden, (matches) => {
     if (matches) {
       hideLive2D()
-    } else {
+    }
+    else {
       showLive2D()
     }
   })

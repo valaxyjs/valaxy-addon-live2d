@@ -1,6 +1,8 @@
-import { Live2DModel as BaseLive2DModel } from 'pixi-live2d-display'
+import type { EventEmitter } from 'eventemitter3'
+import type { MotionManager } from 'pixi-live2d-display'
 import { Graphics } from '@pixi/graphics'
 import { Ticker } from '@pixi/ticker'
+import { Live2DModel as BaseLive2DModel } from 'pixi-live2d-display'
 
 BaseLive2DModel.registerTicker(Ticker)
 
@@ -26,7 +28,8 @@ export class Live2DModel extends BaseLive2DModel {
 
     this.on('hit', this.startHitMotion)
 
-    this.internalModel.motionManager.on('motionStart', (group: string, index: number) => {
+    const motionManager = this.internalModel.motionManager as MotionManager & InstanceType<typeof EventEmitter>
+    motionManager.on('motionStart', (group: string, index: number) => {
       this.currentMotionStartTime = this.elapsedTime
       this.currentMotionDuration = 0
 
@@ -67,6 +70,7 @@ export class Live2DModel extends BaseLive2DModel {
   }
 
   startHitMotion(hitAreaNames: string[]) {
+    debugger
     for (let area of hitAreaNames) {
       area = area.toLowerCase()
 

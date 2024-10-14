@@ -1,5 +1,5 @@
-import { lowerCase } from 'lodash-es'
 import type { Live2DModel } from 'pixi-live2d-display'
+import { lowerCase } from 'lodash-es'
 
 enum StageState {
   NOT_AVAILABLE, PENDING, COMPLETED, FAILED,

@@ -1,5 +1,5 @@
+import type { FederatedPointerEvent } from 'pixi.js'
 import type { Live2DModel } from 'pixi-live2d-display'
-import type { InteractionEvent } from '@pixi/interaction'
 
 export interface DraggableLive2DModel extends Live2DModel {
   dragging: boolean
@@ -16,19 +16,19 @@ export function draggable(_model: Live2DModel) {
   model.on('pointerupoutside', onPointerUp)
 }
 
-function onPointerDown(this: DraggableLive2DModel, e: InteractionEvent) {
+function onPointerDown(this: DraggableLive2DModel, e: FederatedPointerEvent) {
   this.dragging = true
   this._pointerX = e.data.global.x - this.x
   this._pointerY = e.data.global.y - this.y
 }
 
-function onPointerMove(this: DraggableLive2DModel, e: InteractionEvent) {
+function onPointerMove(this: DraggableLive2DModel, e: FederatedPointerEvent) {
   if (this.dragging) {
     this.position.x = e.data.global.x - this._pointerX
     this.position.y = e.data.global.y - this._pointerY
   }
 }
 
-function onPointerUp(this: DraggableLive2DModel, _e: InteractionEvent) {
+function onPointerUp(this: DraggableLive2DModel, _e: FederatedPointerEvent) {
   this.dragging = false
 }

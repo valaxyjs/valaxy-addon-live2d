@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import 'pixi.js'
-import './styles/index.scss'
 import { watch } from 'vue'
 import { useAddonLive2d } from './client'
 import { hideLive2dTool, showLive2dTool } from './utils/animate'
+import 'pixi.js'
+import './styles/index.scss'
 
 const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLive2DHide } = useAddonLive2d()
 
@@ -31,3 +31,10 @@ watch(isLive2DHide, isHide => (isHide ? hideLive2dTool : showLive2dTool)())
     </span>
   </div>
 </template>
+
+<style lang="scss" scoped>
+#live2d-canvas {
+  /** Prevents users from modifying canvas attributes to invalidate live2d-tips */
+  vertical-align: baseline !important;
+}
+</style>

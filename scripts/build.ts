@@ -1,7 +1,7 @@
+import { exec } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import { exec } from 'node:child_process'
 import consola from 'consola'
 import pkg from '../package.json'
 

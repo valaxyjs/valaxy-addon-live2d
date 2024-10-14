@@ -1,5 +1,5 @@
-import { getModelJson } from '../utils/model'
 import type { Live2DCollection } from '../types'
+import { getModelJson } from '../utils/model'
 
 const MODEL_KEY = 'modelKey'
 const SKIN_KEY = 'skinKey'

@@ -1,12 +1,11 @@
-import { Application } from '@pixi/app'
 import type { Renderer } from '@pixi/core'
+import type Stats from 'stats.js'
+import { Application } from '@pixi/app'
 import { BatchRenderer, extensions } from '@pixi/core'
 import { Extract } from '@pixi/extract'
-import { InteractionManager } from '@pixi/interaction'
 import { TickerPlugin } from '@pixi/ticker'
-import type Stats from 'stats.js'
 
-extensions.add(TickerPlugin, Extract, BatchRenderer, InteractionManager)
+extensions.add(TickerPlugin, Extract, BatchRenderer)
 
 export class PixiApp extends Application {
   declare renderer: Renderer
