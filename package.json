@@ -22,6 +22,10 @@
     "ci:publish": "cd dist && npm publish --access public",
     "build": "tsx scripts/build.ts"
   },
+  "peerDependencies": {
+    "@vueuse/core": "13.3.0",
+    "lodash-es": "^4.17.21"
+  },
   "dependencies": {
     "pixi-live2d-display": "^0.5.0-beta",
     "pixi.js": "^7.4.2",
