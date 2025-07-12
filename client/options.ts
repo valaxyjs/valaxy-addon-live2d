@@ -28,6 +28,8 @@ export function useAddonLive2dConfig() {
       skipHello: false,
       hideOnScreenSizes: 600,
       debugger: false,
+      defaultVisibility: true,
+      cookieExpires: 7,
 
       ...options,
 

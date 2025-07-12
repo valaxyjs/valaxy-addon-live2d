@@ -52,6 +52,16 @@ export interface Live2dOptions {
    * @defaultValue false
    */
   debugger?: boolean
+  /**
+   * Live2D 默认显示状态
+   * @defaultValue true
+   */
+  defaultVisibility?: boolean
+  /**
+   * Cookie 过期时间（天）
+   * @defaultValue 7
+   */
+  cookieExpires?: number
 }
 
 export interface Live2DCollection {

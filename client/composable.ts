@@ -1,37 +1,53 @@
-import type { Ref } from 'vue'
 import type { Live2DApp as Live2DAppType } from '../app/Live2DApp'
-import { isClient, useMediaQuery } from '@vueuse/core'
+import { isClient, useWindowSize } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import { Live2dTipsHandler } from '../helpers/tips'
+import { hideLive2dTool, showLive2dTool } from '../utils/animate'
 import { getCookie, setCookie } from '../utils/cookie'
 import { getModelJson } from '../utils/model'
 import { convertJsdelivrUrlToGithubApiUrl, getFilenamesFromGitHub } from '../utils/network'
 import { getLive2DModel, setLive2DModelKeys } from '../utils/storage'
 import { useAddonLive2dConfig } from './options'
 
+let isInitialized = false
+const live2DApp = ref<typeof Live2DAppType>()
+const isLive2DHide = ref(false)
+
 export function useAddonLive2d() {
   const live2dOptions = useAddonLive2dConfig()
-  const { randomCharacter, randomSkin, live2DCollection, live2dTips, hideOnScreenSizes } = live2dOptions.value
+  const { randomCharacter, randomSkin, live2DCollection, live2dTips, hideOnScreenSizes, defaultVisibility, cookieExpires } = live2dOptions.value
+  const { width } = useWindowSize()
 
-  const live2DApp = ref<typeof Live2DAppType>()
-  const isLive2DHide = ref(false)
-  let isHidden: Ref<boolean> = ref(false)
   const live2dTipsHandler = new Live2dTipsHandler(live2dTips!)
 
   async function _initializeLive2DApp() {
+    isInitialized = true
+
     await import('../lib/index.js')
     live2DApp.value = (await import('../app/Live2DApp')).Live2DApp
 
-    if (getCookie('live2d') === 'Show') {
-      setTimeout(() => {
-        showLive2D()
-      }, 0)
+    if (hideOnScreenSizes !== false) {
+      const maxWidth = typeof hideOnScreenSizes === 'string'
+        ? Number.parseInt(hideOnScreenSizes)
+        : hideOnScreenSizes!
+
+      watch(width, (newWidth) => {
+        if (newWidth <= maxWidth) {
+          hideLive2D()
+        }
+        else {
+          showLive2D()
+        }
+      }, { immediate: true })
     }
-    if (getCookie('live2d') === 'Hide') {
-      setTimeout(() => {
-        hideLive2D()
-      }, 0)
+
+    const live2dCookie = getCookie('live2d')
+    const actionMap = {
+      Show: showLive2D,
+      Hide: hideLive2D,
+      default: defaultVisibility ? showLive2D : hideLive2D,
     }
+    actionMap[live2dCookie || 'default']()
 
     live2dTipsHandler.init()
     live2DApp.value.init(live2dOptions.value, live2dTipsHandler)
@@ -125,55 +141,39 @@ export function useAddonLive2d() {
     live2DApp.value?.captureFrame()
   }
 
-  function toggleLive2DVisibility() {
-    const live2dElement = document.getElementById('live2d')!
-
-    isLive2DHide.value = live2dElement.style.bottom === '0px' || live2dElement.style.bottom === ''
-
-    isLive2DHide.value ? hideLive2D() : showLive2D()
-  }
-
   function hideLive2D() {
     isLive2DHide.value = true
 
+    hideLive2dTool()
+
     const live2dElement = document.getElementById('live2d')!
-    localStorage.setItem('live2d-display', Date.now().toString())
+    // localStorage.setItem('live2d-display', Date.now().toString())
     live2dTipsHandler.showMessage(live2dTips!.tool.display, 2000, 11)
     live2dElement.style.bottom = '-100%'
 
     setTimeout(() => {
-      setCookie('live2d', 'Hide', 7)
+      setCookie('live2d', 'Hide', cookieExpires)
     }, 0)
   }
 
   function showLive2D() {
     isLive2DHide.value = false
 
+    showLive2dTool()
+
     const live2dElement = document.getElementById('live2d')!
     live2dElement.style.bottom = '0px'
     setTimeout(() => {
-      localStorage.removeItem('live2d-display')
+      // localStorage.removeItem('live2d-display')
       live2dElement.style.display = ''
-      setCookie('live2d', 'Show', 7)
+      setCookie('live2d', 'Show', cookieExpires)
     }, 0)
   }
 
-  if (isClient)
+  const toggleLive2DVisibility = () => isLive2DHide.value ? showLive2D() : hideLive2D()
+
+  if (isClient && !isInitialized)
     _initializeLive2DApp()
-
-  if (hideOnScreenSizes !== false) {
-    const screenSize = typeof hideOnScreenSizes === 'string' ? hideOnScreenSizes : `${hideOnScreenSizes}px`
-    isHidden = useMediaQuery(`(max-width: ${screenSize})`)
-  }
-
-  watch(isHidden, (matches) => {
-    if (matches) {
-      hideLive2D()
-    }
-    else {
-      showLive2D()
-    }
-  })
 
   return {
     live2DApp,
@@ -184,9 +184,10 @@ export function useAddonLive2d() {
     getRandomSkin,
     getSequentialSkin,
     captureFrame,
+    hideLive2D,
+    showLive2D,
     toggleLive2DVisibility,
     isLive2DHide,
     live2dTipsHandler,
-    isHidden,
   }
 }
