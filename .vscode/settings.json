@@ -1,0 +1,58 @@
+{
+  "cSpell.words": [
+    "algoliasearch",
+    "antfu",
+    "beian",
+    "bumpp",
+    "composables",
+    "instantsearch",
+    "sakura",
+    "typecheck",
+    "valaxy",
+    "valaxyjs"
+  ],
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.localesPaths": ["./locales"],
+  "i18n-ally.sortKeys": true,
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "svg.preview.background": "editor",
+
+  "stylelint.validate": ["css", "scss", "vue"],
+
+  // Disable the default formatter, use eslint instead
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // Enable eslint for all supported languages
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ]
+}

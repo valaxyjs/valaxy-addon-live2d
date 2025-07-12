@@ -19,8 +19,10 @@
   "main": "index.ts",
   "types": "index.d.ts",
   "scripts": {
+    "dev": "nodemon",
     "ci:publish": "cd dist && npm publish --access public",
-    "build": "tsx scripts/build.ts"
+    "build": "tsx scripts/build.ts",
+    "lint": "eslint ."
   },
   "peerDependencies": {
     "@vueuse/core": "13.3.0",
@@ -33,9 +35,14 @@
     "url": "^0.11.4"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^4.14.1",
     "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.15.30",
     "@types/stats.js": "^0.17.3",
     "consola": "^3.2.3",
+    "eslint": "^9.18.0",
+    "eslint-plugin-format": "^1.0.1",
+    "nodemon": "^3.1.10",
     "tsx": "^4.16.2",
     "vue-tsc": "^2.0.28"
   }

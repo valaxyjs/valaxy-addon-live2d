@@ -7,7 +7,23 @@ import pkg from '../package.json'
 
 const sourceDir = path.resolve(process.cwd())
 const distDir = path.resolve(process.cwd(), 'dist')
-const excludeDirs = ['app', 'helpers', 'tsconfig.json', '.gitignore', 'dist', 'node_modules']
+
+const baseExcludeDirs = ['app', 'helpers', 'tsconfig.json', '.git']
+
+function loadGitIgnoreRules() {
+  const gitIgnorePath = path.join(sourceDir, '.gitignore')
+  if (!fs.existsSync(gitIgnorePath)) {
+    return []
+  }
+
+  const gitIgnoreContent = fs.readFileSync(gitIgnorePath, 'utf-8')
+  return gitIgnoreContent
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#'))
+}
+
+const excludeDirs = [...baseExcludeDirs, ...loadGitIgnoreRules()]
 
 function getVersion() {
   const tagVer = process.env.TAG_VERSION

@@ -1,0 +1,4 @@
+{
+  "watch": ["app", "client", "components", "constants", "helpers", "styles", "types", "utils", "App.vue"],
+  "exec": "pnpm build"
+}
