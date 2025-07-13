@@ -21,8 +21,8 @@ importers:
         specifier: ^7.4.2
         version: 7.4.3
       stats.js:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^0.17.0
+        version: 0.17.0
       url:
         specifier: ^0.11.4
         version: 0.11.4
@@ -3965,8 +3965,8 @@ packages:
   star-markdown-css@0.5.3:
     resolution: {integrity: sha512-ewlx4ge1i6B2jopgOJbhgTbshNFI8HEH5vD2itxDh3qKYz+a9+H2EJC1pyPapDeJEOm0DRpHiAvBOSB/H1RMvA==}
 
-  stats.js@1.0.0:
-    resolution: {integrity: sha512-lPiGleXUce7V0mwAocmWXlc3TG7cek0/6y5MFI88cb3k0FbJPmFIiBUxR+/dapOWNUUuMPoSIl2hWKz+hQDCwQ==}
+  stats.js@0.17.0:
+    resolution: {integrity: sha512-hNKz8phvYLPEcRkeG1rsGmV5ChMjKDAWU7/OJJdDErPBNChQXxCo3WZurGpnWc6gZhAzEPFad1aVgyOANH1sMw==}
 
   statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
@@ -8988,7 +8988,7 @@ snapshots:
 
   star-markdown-css@0.5.3: {}
 
-  stats.js@1.0.0: {}
+  stats.js@0.17.0: {}
 
   statuses@2.0.1: {}
 

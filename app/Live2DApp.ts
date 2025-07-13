@@ -37,7 +37,8 @@ export class Live2DApp {
     if (options.debugger) {
       const Stats = (await import('stats.js')).default
       this.stats = new Stats()
-      this.stats.showPanel(0)
+      this.stats.showPanel(1)
+      document.body.appendChild(this.stats.dom)
       this.stats.dom.style.left = ''
       this.stats.dom.style.right = '0'
     }
@@ -138,8 +139,8 @@ export class Live2DApp {
   }
 
   static clearAppStage(live2dModel?: Live2DModel<InternalModel>): void {
-    if (live2dModel) {
-      this.pixiApp.stage.removeChild(this.model.live2dModel!)
+    if (live2dModel && this.pixiApp.stage.children.includes(live2dModel)) {
+      this.pixiApp.stage.removeChild(live2dModel)
       return
     }
 
