@@ -26,7 +26,7 @@ export function useAddonLive2dConfig() {
       randomCharacter: false,
       randomSkin: false,
       skipHello: false,
-      hideOnScreenSizes: 600,
+      hideOnScreenSizes: 640,
       debugger: false,
       defaultVisibility: true,
       cookieExpires: 7,

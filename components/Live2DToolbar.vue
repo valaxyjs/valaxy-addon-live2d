@@ -48,6 +48,7 @@ const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLiv
     transition-property: all;
     transition-duration: 0.5s, 0.5s;
     will-change: transform;
+    overflow: hidden;
 
     &:hover {
       transform: translateX(0);
