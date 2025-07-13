@@ -199,7 +199,7 @@ export class Live2DApp {
 
   static async destroyModel() {
     this.clearAppStage()
-     
+
     if (this.model) {
       this.model.destroy()
       this.model = null
@@ -207,7 +207,7 @@ export class Live2DApp {
   }
 
   static async restoreModel(source: string | ModelSettings) {
-    await this.loadModel(source);
+    await this.loadModel(source)
   }
 
   @save('stats')

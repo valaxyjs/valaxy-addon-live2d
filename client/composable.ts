@@ -1,6 +1,6 @@
 import type { Live2DApp as Live2DAppType } from '../app/Live2DApp'
-import { isClient, useWindowSize, useTimeoutFn, createSharedComposable } from '@vueuse/core'
-import { ref, watch, onUnmounted } from 'vue'
+import { createSharedComposable, isClient, useTimeoutFn, useWindowSize } from '@vueuse/core'
+import { onUnmounted, ref, watch } from 'vue'
 import { Live2dTipsHandler } from '../helpers/tips'
 import { hideLive2dTool, showLive2dTool } from '../utils/animate'
 import { getCookie, setCookie } from '../utils/cookie'
@@ -16,7 +16,7 @@ export const useAddonLive2d = createSharedComposable(() => {
   const live2DApp = ref<typeof Live2DAppType>()
   const isLive2DHide = ref(false)
   const live2dTipsHandler = new Live2dTipsHandler(live2dTips!)
-  
+
   async function _initializeLive2DApp() {
     await import('../lib/index.js')
     live2DApp.value = (await import('../app/Live2DApp')).Live2DApp
@@ -139,7 +139,7 @@ export const useAddonLive2d = createSharedComposable(() => {
   const { start: startHideModel, stop: stopHideModel } = useTimeoutFn(
     () => live2DApp.value?.hideModel(),
     2000,
-    { immediate: false }
+    { immediate: false },
   )
 
   function hideLive2D() {

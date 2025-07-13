@@ -1,5 +1,5 @@
-import type { FederatedPointerEvent } from 'pixi.js'
 import type { Live2DModel } from 'pixi-live2d-display'
+import type { FederatedPointerEvent } from 'pixi.js'
 
 export interface DraggableLive2DModel extends Live2DModel {
   dragging: boolean
