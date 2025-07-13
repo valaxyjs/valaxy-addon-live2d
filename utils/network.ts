@@ -1,16 +1,11 @@
-export async function urlToJson(url: string): Promise<any> {
-  try {
-    const response = await fetch(url)
-    if (!response.ok) {
-      throw new Error(`请求失败，状态码: ${response.status}`)
-    }
-    const data = await response.json()
-    return data
+import type { Cubism2Spec } from 'pixi-live2d-display'
+
+export async function urlToJson(url: string): Promise<Cubism2Spec.ModelJSON> {
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error(`请求失败，状态码: ${response.status}`)
   }
-  catch (error) {
-    console.error(`请求或解析错误: ${error}`)
-    return null
-  }
+  return await response.json()
 }
 
 export function convertJsdelivrUrlToGithubApiUrl(url: string) {
