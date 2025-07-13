@@ -25,6 +25,7 @@ export class Live2DApp {
   private static _showHitAreaFrames = false
   private static _showModelFrame = false
   private static _showStats = false
+  private static _cachedModel: Live2DModel | null = null
 
   static async init(options: Live2dOptions, live2dTipsHandler: Live2dTipsHandler) {
     settings.RENDER_OPTIONS.hello = !options.skipHello
@@ -181,6 +182,32 @@ export class Live2DApp {
         console.warn(e)
       }
     }, 100)
+  }
+
+  static hideModel() {
+    if (this.model?.live2dModel) {
+      this._cachedModel = this.model.live2dModel
+      this.pixiApp.stage.removeChild(this.model.live2dModel)
+    }
+  }
+
+  static async showModel() {
+    if (this._cachedModel && !this.pixiApp.stage.children.includes(this._cachedModel)) {
+      this.pixiApp.stage.addChild(this._cachedModel)
+    }
+  }
+
+  static async destroyModel() {
+    this.clearAppStage()
+     
+    if (this.model) {
+      this.model.destroy()
+      this.model = null
+    }
+  }
+
+  static async restoreModel(source: string | ModelSettings) {
+    await this.loadModel(source);
   }
 
   @save('stats')
