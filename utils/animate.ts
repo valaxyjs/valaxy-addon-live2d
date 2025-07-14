@@ -10,7 +10,7 @@ export function showLive2dTool(duration = 200) {
 
     live2dTools.forEach((live2dTool) => {
       live2dTool.style.padding = `${5 * percentage}px 0`
-      live2dTool.style.maxHeight = `${60 * percentage}px`
+      live2dTool.style.maxHeight = `${70 * percentage}px`
     })
 
     if (percentage < 1) {
@@ -43,7 +43,7 @@ export function hideLive2dTool(duration = 200) {
     live2dTools.forEach((live2dTool) => {
       if (percentage < 1) {
         live2dTool.style.padding = `5px 0`
-        live2dTool.style.maxHeight = `60px`
+        live2dTool.style.maxHeight = `70px`
         // live2dTool.style.height = `calc-size(auto)`
         live2dTool.style.transform = `translateX(${-40 * percentage}px)`
       }
