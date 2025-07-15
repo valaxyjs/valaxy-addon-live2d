@@ -84,7 +84,7 @@ export interface Live2D {
   /**
    * 皮肤 `textures` 文件夹地址。默认情况下会自动获取
    */
-  textures?: string
+  // textures?: string
 }
 
 export interface Live2dTips {

@@ -9,12 +9,12 @@ export const live2DCollection: Live2DCollection = {
   Tia: {
     message: '来自 Potion Maker 的 Tia 酱 ~',
     models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Tia/index.json',
-    textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures',
+    // textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Tia/textures',
   },
   Pio: {
     message: '来自 Potion Maker 的 Pio 酱 ~',
     models: 'https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/model/Potion-Maker/Pio/index.json',
-    textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
+    // textures: 'https://api.github.com/repos/fghrsh/live2d_api/contents/model/Potion-Maker/Pio/textures',
   },
   ShizukuTalk: {
     models: [
