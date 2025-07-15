@@ -4,6 +4,7 @@ export class Live2dTipsHandler {
   private live2dTips: Live2dTips
   private messageArray: string[] = []
   private messageTimer: number | null = null
+  private currentPriority: number = 0
 
   constructor(live2dTips: Live2dTips) {
     this.live2dTips = live2dTips
@@ -16,7 +17,7 @@ export class Live2dTipsHandler {
     this.activityBasedMessages()
     this.setupAdditionalEvents()
 
-    this.showMessage(this.generateReferrerMessage(), 7000, 10)
+    this.showMessage(this.generateReferrerMessage(), 7000, 1)
   }
 
   private setupEvents() {
@@ -150,33 +151,18 @@ export class Live2dTipsHandler {
     })
   }
 
-  private showHitokoto() {
-    fetch('https://v1.hitokoto.cn')
-      .then(response => response.json())
-      .then((result) => {
-        const text = `这句一言是 <span>${result.creator}</span>投稿的。`
-        this.showMessage(result.hitokoto, 6000, 9)
-        setTimeout(() => {
-          this.showMessage(text, 4000, 9)
-        }, 6000)
-      })
-  }
-
   /**
    * Displays a message on the Live2D model's tips element.
    *
-   * @param {string | object} text - The message to display, which can be a string or an object.
-   *                                 If it's an object, a random selection will be made.
-   * @param {number} [timeout] - The time (in milliseconds) for which the message will be visible.
-   *                                  Defaults to 3000 ms.
-   * @param {number} convertedPriority - The priority of the message. Messages with higher priority
-   *                                     will replace lower-priority ones.
+   * @param {string | object} text - The message to display
+   * @param {number} [timeout] - Display duration in milliseconds
+   * @param {number} priority - Message priority (higher replaces lower)
    *
    * If the `text` is null or empty, the message will be hidden.
    * The function uses sessionStorage to ensure only messages with a higher priority than
    * the current one are displayed. The message will be automatically hidden after the timeout.
    */
-  showMessage(text: string | object, timeout: number = 3000, convertedPriority: number) {
+  showMessage = (text: string | object, timeout: number = 3000, priority: number = 1) => {
     const tips = document.getElementById('live2d-tips')!
 
     if (!text) {
@@ -184,21 +170,24 @@ export class Live2dTipsHandler {
       return
     }
 
-    const currentPriority = sessionStorage.getItem('live2d-text')
+    console.log("priority", priority);
+    console.log("this.currentPriority", this.currentPriority);
+    
+    if (priority < this.currentPriority)
+      return
 
-    if (Number(currentPriority) <= convertedPriority) {
-      if (this.messageTimer) {
-        clearTimeout(this.messageTimer)
-        this.messageTimer = null
-      }
-
-      sessionStorage.setItem('live2d-text', convertedPriority.toString())
-      tips.innerHTML = typeof text === 'string' ? text : this.randomSelection(text)
-      tips.classList.add('live2d-tips-active')
-      this.messageTimer = window.setTimeout(() => {
-        sessionStorage.removeItem('live2d-text')
-        tips.classList.remove('live2d-tips-active')
-      }, timeout)
+    if (this.messageTimer) {
+      clearTimeout(this.messageTimer)
+      this.messageTimer = null
     }
+
+    this.currentPriority = priority
+    tips.innerHTML = typeof text === 'string' ? text : this.randomSelection(text)
+    tips.classList.add('live2d-tips-active')
+
+    this.messageTimer = window.setTimeout(() => {
+      this.currentPriority = 0
+      tips.classList.remove('live2d-tips-active')
+    }, timeout)
   }
 }
