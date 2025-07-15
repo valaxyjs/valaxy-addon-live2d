@@ -1,5 +1,5 @@
 import type { Live2dOptions } from '../types'
-import { captureLive2dImage, loadAsteroids, showHitokoto } from '../utils/tools'
+import { captureLive2dImage, loadAsteroids } from '../utils/tools'
 
 export const defaultLive2DOptions: Live2dOptions = {
   widthLimit: 250,

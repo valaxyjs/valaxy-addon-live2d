@@ -170,9 +170,6 @@ export class Live2dTipsHandler {
       return
     }
 
-    console.log("priority", priority);
-    console.log("this.currentPriority", this.currentPriority);
-    
     if (priority < this.currentPriority)
       return
 

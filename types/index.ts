@@ -46,7 +46,7 @@ export interface Live2dOptions {
   /**
    * 启用的工具列表
    */
-  tools?: Record<Live2DToolId, Live2DToolConfig>
+  tools?: Partial<Record<Live2DToolId, Partial<Live2DToolConfig>>>
   /**
    * 是否开启调试模式
    * @defaultValue false
