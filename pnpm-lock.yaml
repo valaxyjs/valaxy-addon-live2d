@@ -54,6 +54,9 @@ importers:
       tsx:
         specifier: ^4.16.2
         version: 4.19.4
+      valaxy-addon-hitokoto:
+        specifier: ^0.0.1
+        version: 0.0.1
       vue-tsc:
         specifier: ^2.0.28
         version: 2.2.10(typescript@5.8.3)
@@ -4275,6 +4278,9 @@ packages:
   uuid@11.1.0:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
+
+  valaxy-addon-hitokoto@0.0.1:
+    resolution: {integrity: sha512-N+1dl3gwxeoTraT+r7gvNfTUHIjapBNHXj/urILdKQFfji++s7ELqeCNoyyOLUpvLJJOPSfObkJ9MKDsfCm8FA==}
 
   valaxy-theme-yun@0.23.4:
     resolution: {integrity: sha512-N0+WH0H54LUVd/F+WR8f7QJm/rGdG2pQeO5P3s7SfW6+8W8T+I3YL6K48kZDiDplHMpv41VMwGW4xvK5l1O8Sw==}
@@ -9364,6 +9370,8 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   uuid@11.1.0: {}
+
+  valaxy-addon-hitokoto@0.0.1: {}
 
   valaxy-theme-yun@0.23.4(vue@3.5.16(typescript@5.8.3)):
     dependencies:

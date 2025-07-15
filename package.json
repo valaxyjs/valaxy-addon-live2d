@@ -44,6 +44,7 @@
     "eslint-plugin-format": "^1.0.1",
     "nodemon": "^3.1.10",
     "tsx": "^4.16.2",
+    "valaxy-addon-hitokoto": "^0.0.1",
     "vue-tsc": "^2.0.28"
   }
 }

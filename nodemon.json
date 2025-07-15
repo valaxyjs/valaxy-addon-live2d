@@ -1,5 +1,5 @@
 {
-  "watch": ["app", "client", "components", "constants", "helpers", "styles", "types", "utils", "App.vue"],
+  "watch": ["app", "client", "components", "constants", "node", "helpers", "styles", "types", "utils", "App.vue"],
   "ext": "json,ts,vue,scss",
   "exec": "pnpm build"
 }

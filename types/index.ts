@@ -46,7 +46,7 @@ export interface Live2dOptions {
   /**
    * 启用的工具列表
    */
-  // tools?: Array<'hitokoto' | 'asteroids' | 'switch-model' | 'switch-texture' | 'photo' | 'info' | 'quit'>
+  tools?: Record<Live2DToolId, Live2DToolConfig>
   /**
    * 是否开启调试模式
    * @defaultValue false
@@ -116,3 +116,34 @@ export interface Live2dTips {
     display: string[]
   }
 }
+
+export interface Live2DToolStateConfig {
+  label: string
+  bgColor?: string
+}
+
+export interface Live2DToolConfig {
+  id: string
+  visible?: boolean
+  action: Live2DToolAction | (() => void)
+  /** When Live2D is visible */
+  normal?: Live2DToolStateConfig
+  /** When Live2D is hidden (only relevant for toggleVisibility action) */
+  hidden?: Live2DToolStateConfig
+}
+
+export type Live2DToolId
+  = | 'hitokoto'
+    | 'asteroids'
+    | 'switch-model'
+    | 'switch-texture'
+    | 'photo'
+    | 'info'
+    | 'quit'
+
+export type Live2DToolAction
+    = | 'showHitokoto'
+      | 'switchCharacter'
+      | 'switchSkin'
+      | 'captureFrame'
+      | 'toggleVisibility'

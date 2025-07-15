@@ -1,22 +1,58 @@
 <script lang="ts" setup>
-import { useAddonLive2d } from '../client'
+import type { Live2DToolConfig } from '../types'
+import { useAddonLive2d, useAddonLive2dConfig } from '../client'
+import { showHitokoto } from '../utils/tools'
 
+const live2dOptions = useAddonLive2dConfig()
 const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLive2DHide } = useAddonLive2d()
+
+function handleToolAction(action: Live2DToolConfig['action']) {
+  if (typeof action === 'function') {
+    action()
+    return
+  }
+
+  switch (action) {
+    case 'switchCharacter':
+      switchCharacter()
+      break
+    case 'switchSkin':
+      switchSkin()
+      break
+    case 'captureFrame':
+      captureFrame()
+      break
+    case 'toggleVisibility':
+      toggleLive2DVisibility()
+      break
+    case 'showHitokoto':
+      showHitokoto()
+      break
+  }
+}
+
+function getCurrentToolConfig(tool: Live2DToolConfig) {
+  if (tool.action === 'toggleVisibility') {
+    return isLive2DHide.value
+      ? { ...tool.normal, ...tool.hidden }
+      : tool.normal
+  }
+  return tool.normal || {}
+}
 </script>
 
 <template>
   <div id="live2d-tools" :class="isLive2DHide ? 'hide' : 'show'">
-    <span id="live2d-tool-quit" class="live2d-tool hide-live2d" @click="toggleLive2DVisibility()">
-      {{ isLive2DHide ? 'Show' : 'Hide' }}
-    </span>
-    <span id="live2d-tool-switch-model" class="live2d-tool" style="--live2d-tool-bg: #c3a6cb" @click="switchCharacter()">
-      Tia
-    </span>
-    <span id="live2d-tool-switch-texture" class="live2d-tool" style="--live2d-tool-bg: #16a" @click="switchSkin()">
-      Switch
-    </span>
-    <span id="live2d-tool-photo" class="live2d-tool" style="--live2d-tool-bg: orange" @click="captureFrame()">
-      Save
+    <span
+      v-for="(tool, key) in Object.values(live2dOptions.tools!).filter(t => t.visible !== false)"
+      :id="tool.id"
+      :key="key"
+      class="live2d-tool"
+      :class="{ 'hide-live2d': tool.action === 'toggleVisibility' }"
+      :style="`--live2d-tool-bg: ${getCurrentToolConfig(tool)?.bgColor || '#666'}`"
+      @click="handleToolAction(tool.action)"
+    >
+      {{ getCurrentToolConfig(tool)?.label }}
     </span>
   </div>
 </template>
@@ -55,13 +91,13 @@ const { switchCharacter, switchSkin, captureFrame, toggleLive2DVisibility, isLiv
     }
   }
 
-  &.show .hide-live2d {
-    background-color: #16a085;
-  }
+  // &.show .hide-live2d {
+  //   background-color: #16a085;
+  // }
 
-  &.hide .hide-live2d {
-    background-color: #b854d4;
-  }
+  // &.hide .hide-live2d {
+  //   background-color: #b854d4;
+  // }
 }
 
 @keyframes shake {

@@ -4,6 +4,7 @@ import { useRuntimeConfig } from 'valaxy'
 import { computed } from 'vue'
 import { live2DCollection } from '../constants/live2dCollection'
 import { live2dTips } from '../constants/live2dTips'
+import { defaultLive2DOptions } from '../node/config'
 import { filterLive2DCollection, mergeConfigs } from '../utils/config'
 
 export function useAddonLive2dConfig() {
@@ -21,16 +22,7 @@ export function useAddonLive2dConfig() {
     const mergedLive2dTips = mergeConfigs(live2dTips, options?.live2dTips || {}) as Live2dTips
 
     return {
-      widthLimit: 250,
-      safetyMargin: 50,
-      randomCharacter: false,
-      randomSkin: false,
-      skipHello: false,
-      hideOnScreenSizes: 640,
-      debugger: false,
-      defaultVisibility: true,
-      cookieExpires: 7,
-
+      ...defaultLive2DOptions,
       ...options,
 
       live2DCollection: filteredAndSortedLive2DCollection,

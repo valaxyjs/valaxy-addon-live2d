@@ -190,6 +190,7 @@ export const useAddonLive2d = createSharedComposable(() => {
 
   return {
     live2DApp,
+    live2dOptions,
     switchCharacter,
     switchSkin,
     getRandomCharacter,
